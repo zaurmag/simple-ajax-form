@@ -18,13 +18,15 @@ module.exports = {
         watch: { // Изменение файлов   
             style: 'src/sass/**/*.+(sass|scss)',
             pug: 'src/pug/**/*.pug',
+            html: 'dist/*.html',
             img: 'src/images/**/*.*',
             js: 'src/js/**/*.js',
             php: 'src/form-submit/*.php',
             jsConct: 'src/js/**/*.js',
             copyCss: 'dist/css/*.css',
             copyJs: 'dist/js/*.js',
-            copyImages: 'dist/images/**/*.*'
+            copyImages: 'dist/images/**/*.*',
+            copyPhp: 'dist/form-submit/*.php'
         },
         clean: {
             all: './dist'
