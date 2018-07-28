@@ -1,32 +1,3 @@
-var captcha = false; // true - показать каптчу; false - скрыть каптчу
-if(captcha) {
-    // Recaptcha
-    window.onload = function () {
-        var addScriptCaptcha = document.createElement('script');
-        addScriptCaptcha.src = 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit';
-        addScriptCaptcha.async = 'async';
-        addScriptCaptcha.defer = 'defer';
-        document.body.appendChild(addScriptCaptcha);
-    };
-    var onloadCallback = function () {
-        publicKey = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
-        // Recaptcha 1
-        grecaptcha.render('recaptcha-1', {
-            'sitekey': publicKey
-        });
-        // Recaptcha 2
-        grecaptcha.render('recaptcha-2', {
-            'sitekey': publicKey,
-            'theme': 'light', //default - light
-            'type': 'audio', //default - image
-            'size': 'normal', //default - normal
-            'tabindex': 1, //default - 0
-            //'callback': , //function on success
-            //'expired-callback': //function when response expires
-        });
-    };
-}
-
 // ======= Ajax Submit Form Plugin =======
 (function($) {
     $.fn.sendForm = function(options) {
