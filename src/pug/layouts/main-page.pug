@@ -9,7 +9,7 @@ html(lang="en")
         meta(name='viewport', content='initial-scale=1.0, width=device-width')
         title #{title}
 
-        link(rel='stylesheet', href='/css/main.min.css')
+        link(rel='stylesheet', href='/wp-content/demos/simple-ajax-form/css/main.min.css')
 
         <!--[if lt IE 9]>
         script(src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js")
@@ -31,13 +31,12 @@ html(lang="en")
                     .form-group
                         input#phone.form-control(name='phone', type='tel', placeholder='Ваш телефон *', required)
 
-
-                    input(type='hidden', name='go', value='5')
-                    input(type='hidden', name='submitCallback', value='callback')
+                    .form-group.recaptcha
+                    input(type='hidden', name='go', value='callback')
 
                     .form-group
                         button.btn-submit.btn.btn-dark.btn-block(type='submit') Отправить
 
-
+        //- Include assets
         script(src='//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
-        script(src='/js/scripts.min.js')
+        script(src='/wp-content/demos/simple-ajax-form/js/scripts.min.js')
