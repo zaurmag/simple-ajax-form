@@ -11,3 +11,10 @@ gulp.task('pug:build', function() {
         }))
         .pipe(gulp.dest(path.path.build.html))
 });
+
+// Копирование в папку шаблона cms
+gulp.task('pugCopy:build', function() {
+    gulp.src(path.path.src.pug)
+        .pipe(plugins.changed(path.path.src.pug))
+        .pipe(gulp.dest(path.path.cms.cmsPath))
+});
