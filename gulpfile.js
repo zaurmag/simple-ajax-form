@@ -10,14 +10,15 @@ gulp.task('build', [
     'pug:build',
     'style:build',
     'styleMin:build',
-    'img:build',
+    //'img:build',
     'jsConct:build',
-    'formSubmit:build'
+    'formSubmit:build',
 
     // Копирование файлов в шаблон CMS. Путь до шаблона меняется в файле - gulp/path.js
     // 'copyStyles:build',
     // 'copyScripts:build',
-    // 'copyImages:build',
+    // 'formSubmitCopy:build',
+    // 'pugCopy:build'
 ]);
 
 // Запуск команд по умолчанию
