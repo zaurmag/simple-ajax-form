@@ -13,6 +13,5 @@ gulp.task('watch', function() {
     // Copy assets to cms template
     // gulp.watch(path.path.watch.copyCss, ['copyStyles:build']);
     // gulp.watch(path.path.watch.copyJs, ['copyScripts:build']);
-    // gulp.watch(path.path.watch.copyImages, ['copyImages:build']);
-    // gulp.watch(path.path.src.fonts, ['fontsCopyCms:build']);
+
 });
