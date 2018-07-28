@@ -1,8 +1,10 @@
 <?php
-if(isset($_POST["go"])) {
+$formGo = isset($_POST["go"]);
+
+if($formGo) {
 
     // ===== Reference ============================
-    $recaptchaOn = false;
+    $recaptchaOn = true; // true- включить рекаптчу; false- отключить рекаптчу
     if ($recaptchaOn) {
         $recaptcha = $_POST['g-recaptcha-response'];
     }
@@ -22,13 +24,10 @@ if(isset($_POST["go"])) {
     // ===== Variables =====
     $to = "demo@zaurmag.ru"; // E-mail на который присылать письмо
     $fromEmail = "no-reply@zaurmag.ru"; // E-mail от имени которого приходит письмо. Почта на домене сайта.
-    $subject = "Форма обратной связи";
+    $subject = "Обращение из формы обратной связи";
 
-    if ( isset($_POST["submitCallback"]) ) {
+    if ( $formGo == 'callback' ) {
         $subject = "Заказан обратный звонок";
-    }
-    if ( isset($_POST["submitFeedback"]) ) {
-        $subject = "Обращение из формы обратной связи";
     }
 
     function adopt($text) {
