@@ -14,7 +14,7 @@ gulp.task('pug:build', function() {
 
 // Копирование в папку шаблона cms
 gulp.task('pugCopy:build', function() {
-    gulp.src(path.path.src.pug)
+    gulp.src(path.path.build.html + '*.html')
         .pipe(plugins.changed(path.path.src.pug))
         .pipe(gulp.dest(path.path.cms.cmsPath))
 });
