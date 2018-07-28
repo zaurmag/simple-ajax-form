@@ -6,6 +6,7 @@ block variables
 block columns
     h1.text-center Простая форма связи на Ajax
 
+    //- Feedback form
     .form.form-container
         form#feedbackForm.form__form.feedback-form(action='#')
             fieldset.form__fields.form__hide-success
@@ -20,14 +21,14 @@ block columns
 
                 .form-group.recaptcha
 
-                input(type='hidden', name='go', value='5')
-                input(type='hidden', name='submitFeedback', value='feedback')
+                .form-group
+                    .alert.alert-info Каптча работает в тестовом режиме
+
+                input(type='hidden', name='go', value='feedback')
 
                 .form-group.btn-block
                     button.btn-submit.btn.btn-dark.btn-block(type='submit', name='submitFeedback') Отправить
 
-    h2.text-center Форма в модальном окне
+    h2.text-center Форма в модальном окне <span class="small">(без рекаптчи)</span>
     .modal-btn-container.text-center
         a.modal-popup.btn.btn-dark.px-5(href='#callback') Заказать звонок
-
-
