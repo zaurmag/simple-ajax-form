@@ -11,7 +11,7 @@ gulp.task('watch', function() {
     gulp.watch(path.path.watch.php, ['formSubmit:build']);
 
     // Copy assets to cms template
-    gulp.watch(path.path.watch.pug, ['copyPug:build']);
+    gulp.watch(path.path.watch.html, ['pugCopy:build']);
     gulp.watch(path.path.watch.copyCss, ['copyStyles:build']);
     gulp.watch(path.path.watch.copyJs, ['copyScripts:build']);
     gulp.watch(path.path.watch.php, ['formSubmitCopy:build']);
