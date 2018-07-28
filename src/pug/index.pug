@@ -1,0 +1,33 @@
+extends layouts/main-page
+
+block variables
+    - var title = 'Простая форма на ajax'
+
+block columns
+    h1.text-center Простая форма связи на Ajax
+
+    .form.form-container
+        form#feedbackForm.form__form.feedback-form(action='#')
+            fieldset.form__fields.form__hide-success
+                .form-group
+                    input.form-control(name='name', type='text', placeholder='Ваше имя *', required)
+
+                .form-group
+                    input.form-control(name='email', type='email', placeholder='Ваш e-mail *', required)
+
+                .form-group
+                    textarea#message.form-control(name='message', cols='20', rows='10', placeholder='Ваше сообщение *', required)
+
+                .form-group.recaptcha
+
+                input(type='hidden', name='go', value='5')
+                input(type='hidden', name='submitFeedback', value='feedback')
+
+                .form-group.btn-block
+                    button.btn-submit.btn.btn-dark.btn-block(type='submit', name='submitFeedback') Отправить
+
+    h2.text-center Форма в модальном окне
+    .modal-btn-container.text-center
+        a.modal-popup.btn.btn-dark.px-5(href='#callback') Заказать звонок
+
+

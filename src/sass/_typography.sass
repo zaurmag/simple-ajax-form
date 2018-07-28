@@ -1,0 +1,90 @@
+// ************ Titles **
+h1,
+h2:not(.form__success-title),
+h3:not(.form__success-title),
+h4:not(.form__success-title),
+h5:not(.form__success-title),
+h6:not(.form__success-title)
+    color: $gray-700
+    margin: 20px 0
+
+    line-height: 1.2
+
+h1,
+.h1
+    margin: 0 0 30px
+
+// ************ Responsive titles **
+@media (max-width: 320px)
+    h1
+        font-size: 24px
+
+    h2
+        font-size: 22px
+
+    h3
+        font-size: 20px
+
+    h4
+        font-size: 18px
+
+    h5
+        font-size: 17px
+
+    h6
+        font-size: 16px
+
+@include media-breakpoint-only(xl)
+    h1
+        font-size: 30px
+
+    h2
+        font-size: 27px
+
+    h3
+        font-size: 22px
+
+    h4
+        font-size: 20px
+
+    h5
+        font-size: 18px
+
+    h6
+        font-size: 16px
+
+@include media-breakpoint-between('320', lg)
+    h1
+        /* 30px - 24px */
+        font-size: calc(1.5rem + 6 * (100vw - 320px) / 880)
+
+    h2
+        /* 27px - 22px */
+        font-size: calc(1.375rem + 5 * (100vw - 320px) / 880)
+
+    h3
+        /* 22px - 20px */
+        font-size: calc(1.250rem + 2 * (100vw - 320px) / 880)
+
+    h4
+        /* 20px - 18px */
+        font-size: calc(1.125rem + 2 * (100vw - 320px) / 880)
+
+    h5
+        /* 18px - 17px */
+        font-size: calc(1.063rem + 1 * (100vw - 320px) / 880)
+
+    h6
+        /* 16px */
+        font-size: 1rem
+
+    
+
+/** List *
+
+ul,
+ol
+    list-style: none
+    margin: 0
+    padding: 0
+
