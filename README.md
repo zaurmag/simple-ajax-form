@@ -1,7 +1,7 @@
 # simple-ajax-form
 Простая форма связи на ajax
 
-<a href="https://zaurmag.ru/priyatny-e-poleznosti-dlya-sajta/forma-svyazi-na-ajax.html" target="_blank">Демо</a>
+<a href="https://zaurmag.ru/wp-content/demos/simple-ajax-form/" target="_blank">Демо</a>
 
 Конечные файлы формы находятся в папке /dist.
 
