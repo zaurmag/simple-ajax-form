@@ -5,7 +5,7 @@
 
 // ======= Ajax Submit Form Plugin =======
 (function($) {
-    $.fn.sendForm = function(options) {
+    $.fn.simpleSendForm = function(options) {
         // Options
         options = $.extend({
             successTitle: "Спасибо, что выбрали нас!",
