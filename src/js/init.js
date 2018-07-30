@@ -6,7 +6,7 @@
 jQuery(document).ready(function($) {
 
     // ======= Init form =======
-    $('#feedbackForm').sendForm({
+    $('#feedbackForm').simpleSendForm({
         successTitle: "Ваше сообщение успешно отправлено!",
         successText: "Мы ответим Вам в самое ближайшее время.",
         captcha: true,
@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
     });
 
     // ===== Init modal form ====
-    $('#callbackForm').sendForm({
+    $('#callbackForm').simpleSendForm({
         successTitle: "Ваша заявка принята!",
         successText: "Наш сотрудник свяжется с Вами в самое ближайшее время.",
         autoClose: true,
