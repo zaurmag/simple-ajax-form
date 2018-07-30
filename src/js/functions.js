@@ -1,3 +1,8 @@
+/**
+* Ajax form
+* @author: Zaur Magomedov
+*/
+
 // ======= Ajax Submit Form Plugin =======
 (function($) {
     $.fn.sendForm = function(options) {
