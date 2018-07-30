@@ -106,7 +106,7 @@ jQuery(document).ready(function($) {
     $('#feedbackForm').simpleSendForm({
         successTitle: "Ваше сообщение успешно отправлено!",
         successText: "Мы ответим Вам в самое ближайшее время.",
-        captcha: true,
+        captcha: false,
         mailUrl: "/wp-content/demos/simple-ajax-form/form-submit/submit.php"
     });
 
@@ -117,7 +117,7 @@ jQuery(document).ready(function($) {
         autoClose: true,
         autoCloseDelay: 3000,
         mailUrl: "/wp-content/demos/simple-ajax-form/form-submit/submit.php",
-        captcha: true
+        captcha: false
     });
 
     // ======= Init magnific popup =======
