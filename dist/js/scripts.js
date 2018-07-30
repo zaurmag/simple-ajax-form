@@ -1,35 +1,11 @@
-var captcha = false; // true - показать каптчу; false - скрыть каптчу
-if(captcha) {
-    // Recaptcha
-    window.onload = function () {
-        var addScriptCaptcha = document.createElement('script');
-        addScriptCaptcha.src = 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit';
-        addScriptCaptcha.async = 'async';
-        addScriptCaptcha.defer = 'defer';
-        document.body.appendChild(addScriptCaptcha);
-    };
-    var onloadCallback = function () {
-        publicKey = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
-        // Recaptcha 1
-        grecaptcha.render('recaptcha-1', {
-            'sitekey': publicKey
-        });
-        // Recaptcha 2
-        grecaptcha.render('recaptcha-2', {
-            'sitekey': publicKey,
-            'theme': 'light', //default - light
-            'type': 'audio', //default - image
-            'size': 'normal', //default - normal
-            'tabindex': 1, //default - 0
-            //'callback': , //function on success
-            //'expired-callback': //function when response expires
-        });
-    };
-}
+/**
+* Ajax form
+* @author: Zaur Magomedov
+*/
 
 // ======= Ajax Submit Form Plugin =======
 (function($) {
-    $.fn.sendForm = function(options) {
+    $.fn.simpleSendForm = function(options) {
         // Options
         options = $.extend({
             successTitle: "Спасибо, что выбрали нас!",
@@ -119,12 +95,28 @@ if(captcha) {
         return this.each(make);
     };
 })(jQuery);
+/**
+* Initializations scripts file
+* @author: Zaur Magomedov
+*/
+
 jQuery(document).ready(function($) {
 
     // ======= Init form =======
-    $('#feedbackForm').sendForm({
+    $('#feedbackForm').simpleSendForm({
         successTitle: "Ваше сообщение успешно отправлено!",
         successText: "Мы ответим Вам в самое ближайшее время.",
+        captcha: true,
+        mailUrl: "/wp-content/demos/simple-ajax-form/form-submit/submit.php"
+    });
+
+    // ===== Init modal form ====
+    $('#callbackForm').simpleSendForm({
+        successTitle: "Ваша заявка принята!",
+        successText: "Наш сотрудник свяжется с Вами в самое ближайшее время.",
+        autoClose: true,
+        autoCloseDelay: 3000,
+        mailUrl: "/wp-content/demos/simple-ajax-form/form-submit/submit.php",
         captcha: true
     });
 
@@ -139,14 +131,6 @@ jQuery(document).ready(function($) {
         midClick: true,
         removalDelay: 300,
         mainClass: 'mfp-top-up'
-    });
-
-    // ===== Init modal form ====
-    $('#callbackForm').sendForm({
-        successTitle: "Ваша заявка принята!",
-        successText: "Наш сотрудник свяжется с Вами в самое ближайшее время.",
-        autoClose: true,
-        autoCloseDelay: 3000
     });
 
 }); // end ready

@@ -2015,7 +2015,7 @@ input[type="button"].btn-block {
 .alert {
   position: relative;
   padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   border: 1px solid transparent; }
 
 .alert-heading {
@@ -4461,6 +4461,9 @@ ol {
   list-style: none;
   margin: 0;
   padding: 0; }
+
+.small {
+  font-size: 16px !important; }
 
 /* Magnific Popup CSS */
 .mfp-bg {
