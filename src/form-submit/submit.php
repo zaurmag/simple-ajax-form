@@ -1,5 +1,5 @@
 <?php
-$formGo = isset($_POST["go"]);
+$formGo = $_POST["go"];
 
 if($formGo) {
 
