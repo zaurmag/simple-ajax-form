@@ -1,9 +1,8 @@
-var gulp = require('gulp'),
-    path = require('./path.js'),
-    del = require('del');
-
-gulp.task('clean', function() {
-    return del([
-        path.path.clean.all
-    ]);
-});
+var path = require('./path/path.js');
+module.exports = function() {
+    $.gulp.task('clean', function() {
+        return $.del([
+            path.path.clean.all
+        ]);
+    });
+};

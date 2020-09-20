@@ -1,64 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8">
-    <meta name="theme-color" content="#168dd3">
-    <meta http-equiv="X-UA-Compatible" content="IE = edge">
+    <meta name="theme-color" content="#10cfe6">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, width=device-width">
     <title>Простая форма на ajax</title>
-    <link rel="stylesheet" href="/wp-content/demos/simple-ajax-form/css/main.min.css"><!--[if lt IE 9]>
+    <link rel="stylesheet" href="./css/main.dev.css"><!--[if lt IE 9]>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script><![endif]-->
   </head>
   <body>
-    <div id="page">
-      <div class="container maincontainer">
-        <h1 class="text-center">Простая форма связи на Ajax</h1>
-        <div class="form form-container">
-          <form class="form__form feedback-form" id="feedbackForm" action="#">
-            <fieldset class="form__fields form__hide-success">
-              <div class="form-group">
-                <input class="form-control" name="name" type="text" placeholder="Ваше имя *" required>
+    <div class="container pt-80">
+      <div class="row">
+        <main class="content__no-cols col-12">
+          <h1 class="text-center">Форма связи</h1>
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="form form-container">
+                <form class="form__form feedback-form" id="feedbackForm" action="#">
+                  <fieldset class="form__fields form__hide-success">
+                    <div class="form-group">
+                      <input class="form-control" name="name" type="text" placeholder="Ваше имя *" required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" name="email" type="email" placeholder="Ваш e-mail *" required>
+                    </div>
+                    <div class="form-group">
+                      <textarea class="form-control" id="message" name="message" cols="20" rows="10" placeholder="Ваше сообщение *" required></textarea>
+                    </div>
+                    <div class="form-group recaptcha"></div>
+                    <div class="form-group">
+                      <div class="alert alert-info">Каптча работает в тестовом режиме</div>
+                    </div>
+                    <input type="hidden" name="go" value="feedback">
+                    <div class="form-group btn-block">
+                      <button class="btn-submit btn btn-lg btn-dark btn-block" type="submit" name="submitFeedback">Отправить</button>
+                    </div>
+                  </fieldset>
+                </form>
               </div>
-              <div class="form-group">
-                <input class="form-control" name="email" type="email" placeholder="Ваш e-mail *" required>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" id="message" name="message" cols="20" rows="10" placeholder="Ваше сообщение *" required></textarea>
-              </div>
-              <div class="form-group recaptcha"></div>
-              <div class="form-group">
-                <div class="alert alert-info">Каптча работает в тестовом режиме</div>
-              </div>
-              <input type="hidden" name="go" value="feedback">
-              <div class="form-group btn-block">
-                <button class="btn-submit btn btn-dark btn-block" type="submit" name="submitFeedback">Отправить</button>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-        <h2 class="text-center">Форма в модальном окне <span class="small">(без рекаптчи)</span></h2>
-        <div class="modal-btn-container text-center"><a class="modal-popup btn btn-dark px-5" href="#callback">Заказать звонок</a></div>
+            </div>
+          </div>
+          <h2 class="h1 text-center mt-50">Форма в модальном окне</h2>
+          <div class="modal-btn-container text-center"><a class="popup-form--js btn btn-dark px-5" href="#callback">Заказать звонок</a></div>
+        </main>
       </div>
     </div>
-    <div class="zoom-anim-dialog mfp-hide white-block callback-block" id="callback">
-      <form class="form__form callback-form" id="callbackForm" action="#">
-        <fieldset class="form__fields form__hide-success">
-          <legend class="form__title text-center mb-3">Мы вам перезвоним!</legend>
-          <div class="form-group">
-            <input class="form-control" id="name" name="name" type="text" placeholder="Ваше имя *" required>
-          </div>
-          <div class="form-group">
-            <input class="form-control" id="phone" name="phone" type="tel" placeholder="Ваш телефон *" required>
-          </div>
-          <div class="form-group recaptcha"></div>
-          <input type="hidden" name="go" value="callback">
-          <div class="form-group">
-            <button class="btn-submit btn btn-dark btn-block" type="submit">Отправить</button>
-          </div>
-        </fieldset>
-      </form>
+    <div class="zoom-anim-dialog mfp-hide mfp-white-block" id="callback">
+      <div class="form callback">
+        <form class="form__form callback-form" id="callbackForm" action="#">
+          <fieldset class="form__fields form__hide-success">
+            <legend class="form__title">Мы вам перезвоним!</legend>
+            <div class="form-group">
+              <input class="form-control" id="name" name="name" type="text" placeholder="Ваше имя*" required>
+            </div>
+            <div class="form-group">
+              <input class="form-control phone-mask" id="phone" name="phone" type="text" placeholder="Ваш телефон*" required>
+            </div>
+            <input type="hidden" name="go" value="callback">
+            <div class="form-group">
+              <button class="btn-submit btn btn-primary btn-block" type="submit">Отправить</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/wp-content/demos/simple-ajax-form/js/scripts.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./js/scripts.js"></script>
   </body>
 </html>

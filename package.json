@@ -1,39 +1,46 @@
 {
-  "name": "zm.gulp.project",
+  "name": "zaurmag-gulp-taskmanager",
   "version": "1.0.0",
-  "description": "My developer gulp project. zaurmag.ru",
+  "description": "My gulp project v.4",
   "main": "index.js",
   "scripts": {
-    "test": "\"Test\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "Zaur Magomedov",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "latest",
+    "critical": "latest",
     "del": "latest",
     "gulp": "latest",
     "gulp-autoprefixer": "latest",
+    "gulp-changed": "latest",
     "gulp-cheerio": "latest",
     "gulp-concat": "latest",
-    "gulp-cssnano": "latest",
-    "gulp-duration": "latest",
-    "gulp-file-include": "latest",
-    "gulp-imagemin": "latest",
+    "gulp-csso": "latest",
+    "gulp-data": "latest",
     "gulp-load-plugins": "latest",
     "gulp-plumber": "latest",
-    "gulp-pug": "^3.3.0",
+    "gulp-pug": "latest",
+    "gulp-pug2": "latest",
+    "gulp-pxtorem": "latest",
     "gulp-rename": "latest",
     "gulp-replace": "latest",
-    "gulp-rigger": "latest",
     "gulp-sass": "latest",
     "gulp-sourcemaps": "latest",
     "gulp-svg-sprite": "latest",
     "gulp-tinypng": "latest",
     "gulp-uglify": "latest",
     "gulp-watch": "latest",
+    "gulp-zip": "latest",
     "gulp.spritesmith": "latest",
-    "require-dir": "latest",
-    "gulp-changed": "latest",
-    "gulp-debug": "latest"
+    "vinyl-ftp": "latest"
+  },
+  "dependencies": {
+    "bootstrap": "latest",
+    "gulp-favicons": "latest",
+    "magnific-popup": "latest",
+    "owl.carousel": "latest"
   }
 }

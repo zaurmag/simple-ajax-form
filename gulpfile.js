@@ -1,25 +1,43 @@
-var gulp = require('gulp'), // подключаем Gulp
-    plugins = require('gulp-load-plugins')({
+'use strict';
+
+global.$ = {
+    path: {
+        task: require('./gulp/path/tasks.js')
+    },
+    gulp: require('gulp'),
+    del: require('del'),
+    browserSync: require('browser-sync').create(),
+    vinylFtp: require('vinyl-ftp'),
+    plugins: require('gulp-load-plugins')({
         overridePattern: true,
         pattern: '*'
-    }),
-    reqDir = require('require-dir');
-    reqDir('./gulp', { recurse: true });
+    })
+};
 
-gulp.task('build', [
-    'pug:build',
-    'style:build',
-    'styleMin:build',
-    //'img:build',
-    'jsConct:build',
-    'formSubmit:build',
+$.path.task.forEach(function(taskPath){
+    require(taskPath)();
+});
 
-    // Копирование файлов в шаблон CMS. Путь до шаблона меняется в файле - gulp/path.js
-    // 'copyStyles:build',
-    // 'copyScripts:build',
-    // 'formSubmitCopy:build',
-    // 'pugCopy:build'
-]);
-
-// Запуск команд по умолчанию
-gulp.task('default', ['build', 'browser-sync', 'watch']);
+$.gulp.task('build', $.gulp.series(
+    //'spriteSvg:build',
+    $.gulp.parallel(
+        'pug:build',
+        //'style:build',
+        'styleDev:build',
+        'js:build',
+        'img:build',
+        //'spriteImg:build'
+        //'fonts:build',
+        'resources:build'
+    ))
+);
+$.gulp.task('default', $.gulp.series(
+    'build',
+    //'ftp:build',
+    $.gulp.parallel(
+    //'critical:build',
+    'watch',
+    'bsync',
+    'favicons:lg',
+    'favicons:sm'
+)));

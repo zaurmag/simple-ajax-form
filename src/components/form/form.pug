@@ -1,0 +1,42 @@
+mixin form-callback(id, title, privacy, btn="Отправить", textfield, theme="light")
+    .form.callback__form(class="form--" + theme)
+        form.form__form(id= id + "Form" novalidate)
+            fieldset.form__fields.form__hide-success
+                .form-group.row
+                    label.col-sm-4.col-form-label(for= id + "Name") Ваше имя *
+                    .col-sm-8
+                        input.form-control.form__control(id= id + "Name" name='name', type='text', required)
+
+                .form-group.row
+                    label.col-sm-4.col-form-label(for= id + "Email") E-mail *
+                    .col-sm-8
+                        input.form-control.form__control(id= id + "Email" name='email', type='email', required)
+
+                .form-group.row
+                    label.col-sm-4.col-form-label(for= id + "Phone") Телефон *
+                    .col-sm-8
+                        input.form-control.form__control.phone-mask--js(id= id + "Phone" name='phone', type='text', required)
+
+                if textfield == true
+                    .form-group.row.align-items-start.mt-30
+                        label.col-sm-4.col-form-label(for= id + "Mess") Текст сообщения *
+                        .col-sm-8
+                            textarea.form-control.form__control.form__control--textarea(id= id + "Mess" name="message" required)
+
+                input(type='hidden', name='go', value= id)
+
+                if block
+                    block
+
+                .form-group.mt-40
+                    if(theme == "dark")
+                        button.btn-submit.btn.btn-light.py-10.btn-block(type='submit')= btn
+                    else
+                        button.btn-submit.btn.btn-outline-dark.py-10.btn-block(type='submit')= btn
+
+                if privacy
+                    .text-muted.mt-30.fz-14
+                        | Я даю свое согласие на обработку
+                        | &nbsp;
+                        br
+                        a.mfp-popup-window-js(href="#privacyModal") персональных данных.

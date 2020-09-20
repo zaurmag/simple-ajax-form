@@ -1,0 +1,41 @@
+extends ./base/base
+include components/form/form
+
+block variables
+    - var title = 'Простая форма на ajax'
+
+block columns
+    main.content__no-cols.col-12
+        h1.text-center Форма связи
+
+        //- Feedback form
+        .row.justify-content-center
+            .col-md-6
+                .form.form-container
+                    form#feedbackForm.form__form.feedback-form(action='#')
+                        fieldset.form__fields.form__hide-success
+                            .form-group
+                                input.form-control(name='name', type='text', placeholder='Ваше имя *', required)
+
+                            .form-group
+                                input.form-control(name='email', type='email', placeholder='Ваш e-mail *', required)
+
+                            .form-group
+                                textarea#message.form-control(name='message', cols='20', rows='10', placeholder='Ваше сообщение *', required)
+
+                            .form-group.recaptcha
+
+                            .form-group
+                                .alert.alert-info Каптча работает в тестовом режиме
+
+                            input(type='hidden', name='go', value='feedback')
+
+                            .form-group.btn-block
+                                button.btn-submit.btn.btn-lg.btn-dark.btn-block(type='submit', name='submitFeedback') Отправить
+
+        h2.h1.text-center.mt-50 Форма в модальном окне
+        .modal-btn-container.text-center
+            a.popup-form--js.btn.btn-dark.px-5(href='#callback') Заказать звонок
+
+
+

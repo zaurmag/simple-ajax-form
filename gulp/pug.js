@@ -1,20 +1,17 @@
-var gulp = require('gulp'),
-    path = require('./path.js'),
-    plugins = require('gulp-load-plugins')();
-
-// Собираем Html файлы
-gulp.task('pug:build', function() {
-    gulp.src(path.path.src.pug)
-        .pipe(plugins.plumber())
-        .pipe(plugins.pug({
-            pretty: true
-        }))
-        .pipe(gulp.dest(path.path.build.html))
-});
-
-// Копирование в папку шаблона cms
-gulp.task('pugCopy:build', function() {
-    gulp.src(path.path.build.html + '*.html')
-        .pipe(plugins.changed(path.path.src.pug))
-        .pipe(gulp.dest(path.path.cms.cmsPath))
-});
+var path = require('./path/path.js');
+var fs = require('fs');
+module.exports = function (done) {
+    $.gulp.task('pug:build', function() {
+        return $.gulp.src(path.path.src.pug)
+            .pipe($.plugins.plumber())
+            .pipe($.plugins.data(function(file) { // Парсим JSON
+                return JSON.parse(fs.readFileSync('./src/base/data/data.json', 'utf8'))
+            }))
+            .pipe($.plugins.pug({
+                pretty: true
+            }))
+            .pipe($.gulp.dest(path.path.build.html))
+            .on('end', $.browserSync.reload);
+        done();
+    });
+};
