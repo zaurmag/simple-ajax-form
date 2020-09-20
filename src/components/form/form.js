@@ -1,3 +1,8 @@
+/**
+ * Initializations script file
+ * @author: Zaur Magomedov
+ */
+
 jQuery(document).ready(function($) {
     /**
      * Focus and blur on the input field
@@ -26,5 +31,15 @@ jQuery(document).ready(function($) {
         if($(this).val()) {
             addClassFn($(this));
         }
+    });
+
+    /**
+     * Init forms
+     */
+    // FeedbackForm
+    $('#feedbackForm').simpleSendForm({
+        successTitle: "Ваше сообщение успешно отправлено!",
+        successText: "Мы ответим Вам в самое ближайшее время.",
+        captcha: true
     });
 });

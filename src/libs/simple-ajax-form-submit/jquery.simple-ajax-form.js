@@ -1,5 +1,8 @@
-/* Ajax SimpleSubmit Form Plugin
-   ========================================================================= */
+/**
+ * Simple Ajax form
+ * @author: Zaur Magomedov
+ */
+
 (function($) {
     $.fn.simpleSendForm = function(options) {
         // Options
@@ -29,7 +32,6 @@
         // Submit function
         var make = function() {
             var $this = $(this),
-                form = $this.find('.form'),
                 btn = $this.find('.btn-submit'),
                 captcha = $this.find('.recaptcha');
 
@@ -37,53 +39,67 @@
                 captcha.append('<div class="g-recaptcha" data-sitekey="' + options.captchaPublicKey + '"></div>')
             }
 
-            $(this).submit(function() {
+            $(this).submit(function(event) {
                 var data = $(this).serialize();
+                var btnClass = "progress-bar-animated progress-bar-striped bg-primary text-white";
+
+                if ($this[0].checkValidity() === false) {
+                    $this.addClass('was-validated');
+                    errorRes('Пожалуйста, заполните обязательные поля формы!');
+                    return false;
+                }
+
                 function errorRes(errorMessage) {
-                    btn.removeClass('progress-bar-animated progress-bar-striped bg-success');
+                    btn.removeClass(btnClass);
                     $this.append('<div class="form__error alert alert-danger text-center mt-3 mb-0">' + errorMessage + '</div>');
                     setTimeout(function() {
                         $this.find('.form__error').remove();
                     }, 5000);
                 }
+
                 $.ajax({
                     url: options.mailUrl,
                     type: "POST",
                     data: data,
                     beforeSend: function() {
-                        btn.addClass('progress-bar-animated progress-bar-striped bg-success');
+                        btn.addClass(btnClass);
                     },
-                    success: function(res) {
-                        if (res == 1) {
+                    success: function(result) {
+                        if (result == 1) {
                             $this[0].reset();
                             if(options.captcha) {
                                 grecaptcha.reset();
                             }
+                            setTimeout(function() {
+                                $('.form-styler-js').trigger('refresh');
+                            }, 1);
+                            $this.removeClass('was-validated');
+                            $this.find('.form__group').removeClass('is-focused');
                             $this.find('.form__hide-success').slideUp().delay(5000).slideDown();
-                            btn.removeClass('progress-bar-animated progress-bar-striped bg-success');
+                            btn.removeClass(btnClass);
                             $this.find('.form__hide-success').after('<div class="form__sys-message alert alert-success text-center mb-0"></div>');
-                            $this.find('.form__sys-message').html('<h4 class="form__success-title alert-heading">' + options.successTitle + '</h4><p class = "form__success-text" >' + options.successText + '</p>');
+                            $this.find('.form__sys-message').html('<h4 class="form__success-title alert-heading mb-2">' + options.successTitle + '</h4><p class = "form__success-text" >' + options.successText + '</p>');
                             setTimeout(function() {
                                 $this.find('.form__sys-message').fadeOut().delay(3000).remove();
                                 if (options.autoClose) {
                                     $.magnificPopup.close();
                                 }
                             }, options.autoCloseDelay);
-                        } else if (res == 2) {
+                        } else if (result == 2) {
                             errorRes(options.errorNocaptcha);
-                        } else if (res == 3) {
+                        } else if (result == 3) {
                             errorRes(options.errorCaptcha);
                         } else {
                             errorRes(options.errorSubmit);
                         }
                         if(options.debug) {
-                            console.log(res);
+                            console.log(result);
                         }
                     },
-                    error: function(res) {
+                    error: function(result) {
                         errorRes(options.errorSubmit);
                         if(options.debug) {
-                            console.log(res);
+                            console.log(result);
                         }
                     }
                 });

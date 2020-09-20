@@ -16,25 +16,38 @@
           <h1 class="text-center">Форма связи</h1>
           <div class="row justify-content-center">
             <div class="col-md-6">
-              <div class="form form-container">
-                <form class="form__form feedback-form" id="feedbackForm" action="#">
+              <div class="form">
+                <form id="feedbackForm" novalidate="novalidate">
                   <fieldset class="form__fields form__hide-success">
-                    <div class="form-group">
-                      <input class="form-control" name="name" type="text" placeholder="Ваше имя *" required>
+                    <div class="form__group">
+                      <label class="form__label" for="feedbackName">Ваше имя *</label>
+                      <input class="form__control" id="feedbackName" name="name" type="text" required="required"/>
                     </div>
-                    <div class="form-group">
-                      <input class="form-control" name="email" type="email" placeholder="Ваш e-mail *" required>
+                    <div class="form__group">
+                      <label class="form__label" for="feedbackEmail">E-mail *</label>
+                      <input class="form__control" id="feedbackEmail" name="email" type="email" required="required"/>
                     </div>
-                    <div class="form-group">
-                      <textarea class="form-control" id="message" name="message" cols="20" rows="10" placeholder="Ваше сообщение *" required></textarea>
+                    <div class="form__group">
+                      <label class="form__label" for="feedbackPhone">Телефон *</label>
+                      <input class="form__control phone-mask--js" id="feedbackPhone" name="phone" type="text" required="required"/>
                     </div>
-                    <div class="form-group recaptcha"></div>
-                    <div class="form-group">
-                      <div class="alert alert-info">Каптча работает в тестовом режиме</div>
+                    <div class="form__group">
+                      <label class="form__label form__label--textarea" for="feedbackMess">Текст сообщения *</label>
+                      <textarea class="form__control form__control--textarea" id="feedbackMess" name="message" required="required"></textarea>
                     </div>
-                    <input type="hidden" name="go" value="feedback">
-                    <div class="form-group btn-block">
-                      <button class="btn-submit btn btn-lg btn-dark btn-block" type="submit" name="submitFeedback">Отправить</button>
+                    <div class="form__group">
+                      <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" id="remember" type="checkbox" required="required"/>
+                        <label class="custom-control-label" for="remember">Я даю свое согласие на обработку <a href="#" target="_blank">персональных данных</a>.</label>
+                      </div>
+                    </div>
+                    <div class="form__group recaptcha"></div>
+                    <input type="hidden" name="go" value="feedback"/>
+                    <div class="form-group">
+                      <div class="alert alert-warning">Каптча работает в тестовом режиме</div>
+                    </div>
+                    <div class="form-group mt-40">
+                      <button class="btn--js btn btn-dark btn-lg btn-block" type="submit">Отправить</button>
                     </div>
                   </fieldset>
                 </form>

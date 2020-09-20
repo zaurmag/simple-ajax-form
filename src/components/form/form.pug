@@ -1,42 +1,36 @@
-mixin form-callback(id, title, privacy, btn="Отправить", textfield, theme="light")
-    .form.callback__form(class="form--" + theme)
-        form.form__form(id= id + "Form" novalidate)
-            fieldset.form__fields.form__hide-success
-                .form-group.row
-                    label.col-sm-4.col-form-label(for= id + "Name") Ваше имя *
-                    .col-sm-8
-                        input.form-control.form__control(id= id + "Name" name='name', type='text', required)
+mixin form(id, privacy, textfield, captcha, btn="Отправить")
+    form(id= id + "Form" novalidate)
+        fieldset.form__fields.form__hide-success
+            .form__group
+                label.form__label(for= id + "Name") Ваше имя *
+                input.form__control(id= id + "Name" name='name', type='text', required)
 
-                .form-group.row
-                    label.col-sm-4.col-form-label(for= id + "Email") E-mail *
-                    .col-sm-8
-                        input.form-control.form__control(id= id + "Email" name='email', type='email', required)
+            .form__group
+                label.form__label(for= id + "Email") E-mail *
+                input.form__control(id= id + "Email" name='email', type='email', required)
 
-                .form-group.row
-                    label.col-sm-4.col-form-label(for= id + "Phone") Телефон *
-                    .col-sm-8
-                        input.form-control.form__control.phone-mask--js(id= id + "Phone" name='phone', type='text', required)
+            .form__group
+                label.form__label(for= id + "Phone") Телефон *
+                input.form__control.phone-mask--js(id= id + "Phone" name='phone', type='text', required)
 
-                if textfield == true
-                    .form-group.row.align-items-start.mt-30
-                        label.col-sm-4.col-form-label(for= id + "Mess") Текст сообщения *
-                        .col-sm-8
-                            textarea.form-control.form__control.form__control--textarea(id= id + "Mess" name="message" required)
+            if textfield
+                .form__group
+                    label.form__label.form__label--textarea(for= id + "Mess") Текст сообщения *
+                    textarea.form__control.form__control--textarea(id= id + "Mess", name="message", required)
 
-                input(type='hidden', name='go', value= id)
+            if privacy
+                .form__group
+                    .custom-control.custom-checkbox
+                        input.custom-control-input#remember(type="checkbox", required)
+                        label.custom-control-label(for="remember") Я даю свое согласие на обработку <a href="#" target="_blank">персональных данных</a>.
 
-                if block
-                    block
+            if captcha
+                .form__group.recaptcha
 
-                .form-group.mt-40
-                    if(theme == "dark")
-                        button.btn-submit.btn.btn-light.py-10.btn-block(type='submit')= btn
-                    else
-                        button.btn-submit.btn.btn-outline-dark.py-10.btn-block(type='submit')= btn
+            input(type='hidden', name='go', value= id)
 
-                if privacy
-                    .text-muted.mt-30.fz-14
-                        | Я даю свое согласие на обработку
-                        | &nbsp;
-                        br
-                        a.mfp-popup-window-js(href="#privacyModal") персональных данных.
+            if block
+                block
+
+            .form-group.mt-40
+                button.btn--js.btn.btn-dark.btn-lg.btn-block(type='submit')= btn

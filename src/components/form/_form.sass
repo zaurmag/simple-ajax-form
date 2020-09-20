@@ -14,7 +14,7 @@
         left: 15px
         top: 50%
         pointer-events: none
-        font-size: 14px
+        font-size: 16px
         line-height: 1.2
         transform: translateY(-50%)
         transition: all 0.2s ease
@@ -27,9 +27,10 @@
 
     // Input
     &__control
-        border: 1px solid rgba($black, 0.5)
+        border: 1px solid rgba($black, 0.15)
+        border-radius: $border-radius
         padding: 0 15px
-        font-size: 16px
+        //font-size: 16px
         transition: border-color 0.3s ease
         height: 48px
         width: 100%
@@ -41,12 +42,9 @@
             border-color: rgba($black, 1)
             transition: border-color 0.3s ease
 
-        &.wpcf7-not-valid
-            border-color: $red
-
         &--textarea
             padding: 15px
-            height: 120px
+            height: 150px
 
     &__submit
         align-items: center
@@ -59,7 +57,9 @@
         height: 48px
 
 
-    // Focus state
+    /**
+     * Focus state
+     */
     .is-focused
         #{$self}
             &__control
@@ -67,10 +67,43 @@
                 transition: border-color .2s ease
 
             &__label
-                font-size: 11px
-                top: 8px
+                background-color: $white
+                font-size: 12px
+                top: 0
                 bottom: auto
                 transition: all 0.2s ease
+                padding-left: 5px
+                padding-right: 5px
 
                 &--textarea
-                    top: 4px
+                    top: -4px
+
+    /**
+     * Validate fields
+     */
+    .was-validated
+        input,
+        textarea
+            // Invalid
+            &:invalid
+                &:not(.btn)
+                    border-color: #dc3545
+                    padding-right: calc(1.5em + 0.75rem)
+                    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e")
+                    background-repeat: no-repeat
+                    background-position: right calc(0.375em + 0.1875rem) center
+                    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)
+
+                + .custom-control-label
+                    &::before
+                        border-color: #dc3545
+
+            // Valid
+            &:valid
+                &:not(.btn)
+                    border-color: #28a745
+                    padding-right: calc(1.5em + 0.75rem)
+                    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e")
+                    background-repeat: no-repeat
+                    background-position: right calc(0.375em + 0.1875rem) center
+                    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)
