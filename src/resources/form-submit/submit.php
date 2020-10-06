@@ -85,9 +85,23 @@ $formGo = $formData["go"]; ?>
         if (!empty($recaptcha)) {
             $secret = '6LfMJSgTAAAAABw4lECZsLP5krXztMRZC0_Fgt3O';
             $url = "//www.google.com/recaptcha/api/siteverify?secret=".$secret ."&response=".$recaptcha."&remoteip=".$_SERVER['REMOTE_ADDR'];
-            $response = file_get_contents("//www.google.com/recaptcha/api/siteverify?secret=".$secret ."&response=".$recaptcha."&remoteip=".$_SERVER['REMOTE_ADDR']);
 
-            if ( $response.success === false ) {
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL => 'https://www.google.com/recaptcha/api/siteverify',
+                CURLOPT_POST => 1,
+                CURLOPT_POSTFIELDS => array(
+                    'secret' => $secret,
+                    'response' => $recaptcha
+                )
+            ));
+            $response = curl_exec($curl);
+            curl_close($curl);
+
+            $response = json_decode($response, true);
+
+            if ( $response["success"] === false ) {
                 $answer = '2';
             } else {
                 if (mail($to, adopt($subject), $message, $headers)) {
