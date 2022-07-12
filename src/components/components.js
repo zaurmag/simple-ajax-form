@@ -1,2 +1,2 @@
 // Form
-import './form/form'
+import './form'

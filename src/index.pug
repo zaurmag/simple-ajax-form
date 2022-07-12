@@ -1,11 +1,12 @@
 extends base/pug/base
 
 append variables
-    - var title = 'Главная страница сайта'
+    - var title = 'Простая ajax-форма связи'
     - var pageClass = 'homepage'
     - var menuHref = '/'
 
 block content
     .row.justify-content-center
-        .col-lg-9
-
+        .col-lg-9.pt-50
+            //- Feedback form
+            include ./components/form/form--feedback

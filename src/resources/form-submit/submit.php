@@ -3,7 +3,6 @@ $formData = $_POST;
 $formGo = $formData["go"]; ?>
 
 <?php if(isset($formData)) {
-
     // ===== Reference ============================
     $recaptchaOn = false;
 
@@ -34,7 +33,7 @@ $formGo = $formData["go"]; ?>
     /**
      * Message body
      */
-    $message  = '<html><body>';
+    $message  = '<html lang="ru"><body>';
     $message .= "<table>";
     $title = array(
         "name" => "Имя:",
@@ -64,6 +63,7 @@ $formGo = $formData["go"]; ?>
                'From: '.adopt($formData["name"]).' <'.$fromEmail.'>' . PHP_EOL .
                'Reply-To: '.adopt($formData["name"]).' <'.$formData["email"].'> ' . PHP_EOL;
 
+    $answer = '';
     if ($recaptchaOn) {
         if (!empty($recaptcha)) {
             $secret = '6LfMJSgTAAAAABw4lECZsLP5krXztMRZC0_Fgt3O';
@@ -85,23 +85,23 @@ $formGo = $formData["go"]; ?>
             $response = json_decode($response, true);
 
             if ( $response["success"] === false ) {
-                $answer = '2';
+                $answer = 'error_captcha';
             } else {
                 if (mail($to, adopt($subject), $message, $headers)) {
-                    $answer = '1';
+                    $answer = 'success';
                 } else {
-                    $answer = '0';
+                    $answer = 'error';
                 }
             }
 
         } else {
-            $answer = '3';
+            $answer = 'empty_captcha';
         }
     } else {
         if (mail($to, adopt($subject), $message, $headers)) {
-                $answer = '1';
+                $answer = 'success';
             } else {
-                $answer = '0';
+                $answer = 'error';
         }
     }
 

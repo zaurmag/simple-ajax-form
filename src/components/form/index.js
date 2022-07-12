@@ -1,4 +1,5 @@
 import inputmask from 'inputmask'
+import { Form } from './core'
 const $phoneMask = document.querySelector('.js-phone-mask')
 
 if ($phoneMask) {
@@ -7,3 +8,5 @@ if ($phoneMask) {
 		showMaskOnHover: false
 	}).mask($phoneMask)
 }
+
+new Form('#feedbackForm')

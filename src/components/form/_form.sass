@@ -1,73 +1,68 @@
 .form
     $self: &
 
-    &__group
-        position: relative
+    max-width: 450px
+    margin: 0 auto
 
+    &__title
+        margin: 0 0 20px
+        font-size: 24px
+
+    &__row
         &:not(:last-child)
             margin-bottom: 15px
 
-    // Label
     &__label
-        color: #9c9c9c
-        position: absolute
-        left: 15px
-        top: 50%
-        pointer-events: none
+        display: inline-block
+        margin-bottom: 5px
         font-size: 14px
-        line-height: 1.2
-        transform: translateY(-50%)
-        transition: all 0.2s ease
-        margin: 0
-        z-index: 5
 
-        &--textarea
-            transform: none
-            top: 15px
-
-    // Input
     &__control
-        border: 1px solid rgba($black, 0.5)
-        padding: 0 15px
-        font-size: 16px
-        transition: border-color 0.3s ease
-        height: 48px
+        border: 1px solid $gray-400
+        display: block
         width: 100%
-
-        &::placeholder
-            text-transform: uppercase
+        height: 40px
+        padding: 5px 15px
+        transition: border-color 0.2s ease
 
         &:focus
-            border-color: rgba($black, 1)
-            transition: border-color 0.3s ease
+            outline: none
+            border-color: $gray-600
 
         &--textarea
-            padding: 15px
-            height: 120px
+            height: 150px
 
-    &__submit
-        align-items: center
-        display: flex
-        padding-top: 0
-        padding-bottom: 0
-        justify-content: center
-        font-size: 18px
-        text-transform: uppercase
-        height: 48px
+        &--error
+            border-color: $red-500
 
+    &__error-txt
+        margin-top: 4px
+        font-size: 12px
+        color: $red-500
 
-    // Focus state
-    .is-focused
-        #{$self}
-            &__control
-                border-color: $gray-800
-                transition: border-color .2s ease
+    &__btn
+        background-color: $teal-600
+        border: none
+        color: $white
+        padding: 10px 20px
+        width: 100%
+        transition: background-color 0.3s ease
 
-            &__label
-                font-size: 11px
-                top: 8px
-                bottom: auto
-                transition: all 0.2s ease
+        &:hover
+            background-color: darken($teal-600, 4%)
 
-                &--textarea
-                    top: 4px
+        &--sending
+            animation: progress 0.5s linear infinite
+            background-size: 30px 30px
+            background-color: $teal-300
+            background-image: linear-gradient(45deg, rgba($teal-600, 0.5) 25%, transparent 25%, transparent 50%, rgba($teal-600, 0.5) 50%, rgba($teal-600, 0.5) 75%, transparent 75%, transparent)
+            color: $black
+
+        @include media-breakpoint-up(sm)
+            max-width: 200px
+
+@keyframes progress
+    from
+        background-position: 0 0
+    to
+        background-position: 60px 30px
