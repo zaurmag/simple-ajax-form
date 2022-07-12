@@ -10,7 +10,8 @@ global.$ = {
 		minifyHtml: null,
 		minifyCss: null,
 		minifyJs: null,
-		ftp: false
+		ftp: false,
+		copy: null
 	}).argv,
 	del: require('del'),
 	browserSync: require('browser-sync').create(),
@@ -32,6 +33,7 @@ $.yargs.minify = !!$.yargs.minify
 $.yargs.minifyHtml = $.yargs.minifyHtml !== null ? !!$.yargs.minifyHtml : $.yargs.minify
 $.yargs.minifyCss = $.yargs.minifyCss !== null ? !!$.yargs.minifyCss : $.yargs.minify
 $.yargs.minifyJs = $.yargs.minifyJs !== null ? !!$.yargs.minifyJs : $.yargs.minify
+$.yargs.copy = $.yargs.copy !== null ? !!$.yargs.copy : $.yargs.copy
 
 $.path.task.forEach((taskPath) => {
 	require(taskPath)()
@@ -56,14 +58,25 @@ $.gulp.task('build', $.gulp.series(
 		'favicons:sm'
 	))
 )
+if ($.yargs.copy) {
+	$.gulp.task('default', $.gulp.series(
+		'build',
+		'copy',
+		$.gulp.parallel(
+			// 'critical:build',
+			'watch',
+			'bsync'
+		)))
+} else {
+	$.gulp.task('default', $.gulp.series(
+		'build',
+		$.gulp.parallel(
+			// 'critical:build',
+			'watch',
+			'bsync'
+		)))
+}
 
-$.gulp.task('default', $.gulp.series(
-	'build',
-	$.gulp.parallel(
-		// 'critical:build',
-		'watch',
-		'bsync'
-	)))
 
 $.gulp.task('default_ftp', $.gulp.series(
 	'build',

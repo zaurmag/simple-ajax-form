@@ -4,7 +4,7 @@
   "description": "My starter project for web development",
   "main": "gulpfile.js",
   "scripts": {
-    "Start": "gulp default",
+    "Start": "gulp default --copy true",
     "Minify": "gulp pug:build style:build js:build --minify true",
     "MinifyHtml": "gulp pug:build --minify-html true",
     "MinifyJs": "gulp js:build --minify-js true",

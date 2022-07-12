@@ -14,4 +14,5 @@ module.exports = [
 	'./gulp/zip',
 	'./gulp/ftp',
 	'./gulp/resources',
+	'./gulp/copy'
 ];

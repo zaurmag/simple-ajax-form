@@ -1,5 +1,6 @@
 module.exports = {
 	path: {
+		copyPath: 'D:/OpenServer/domains/localhost/',
 		build: { // Build files
 			root: 'dist/',
 			style: 'dist/css',
