@@ -14,28 +14,16 @@ $formGo = $formData["go"]; ?>
     /**
      * Vars
      */
-    $to = "demo@zaurmag.ru"; // E-mail на который присылать письмо
+    $to = "demo@zaurmag.ru"; // E-mail на который присылать письмо 1111
     $fromEmail = "no-reply@zaurmag.ru"; // E-mail от имени которого приходит письмо. Почта на домене сайта.
 
     switch ($formGo) {
-        case 'callback':
-            $subject = "Заказ обратного звонка";
-            break;
-
-        case 'orderCalc':
-            $subject = "Заявка на расчет стоимости";
-            break;
-
-        case 'services':
-            $subject = "Заявка на вызов замерщика";
-            break;
-
-        case 'price':
-            $subject = "Заявка на прайс-лист";
+        case 'opt':
+            $subject = "Заявка на прайс-лист для оптовика с сайта ***";
             break;
 
         default:
-            $subject = "Сообщение с сайта";
+            $subject = "Сообщение с сайта ****";
             break;
     }
 
@@ -53,12 +41,7 @@ $formGo = $formData["go"]; ?>
         "phone" => "Телефон:",
         "email" => "E-mail:",
         "message" => "Текст сообщения:",
-        "what" => "Что нужно отремонтировать?",
-        "view" => "Вид ремонта",
-        "type" => "Тип помещения",
-        "formCalcArea" => "Площадь помещения",
-        "title" => "Форма:",
-        "subtitle" => "Подзаголовок формы:"
+        "address" => "Адресс торговой точки"
     );
 
     foreach($formData as $key => $value) {
@@ -78,8 +61,8 @@ $formGo = $formData["go"]; ?>
     $message .= '</body></html>';
     $headers = "MIME-Version: 1.0" . PHP_EOL .
                "Content-Type: text/html; charset=utf-8" . PHP_EOL .
-               'From: '.adopt($name).' <'.$fromEmail.'>' . PHP_EOL .
-               'Reply-To: '.adopt($name).' <'.$email.'> ' . PHP_EOL;
+               'From: '.adopt($formData["name"]).' <'.$fromEmail.'>' . PHP_EOL .
+               'Reply-To: '.adopt($formData["name"]).' <'.$formData["email"].'> ' . PHP_EOL;
 
     if ($recaptchaOn) {
         if (!empty($recaptcha)) {
@@ -123,5 +106,4 @@ $formGo = $formData["go"]; ?>
     }
 
     die($answer);
-
 } ?>

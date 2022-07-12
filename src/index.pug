@@ -1,24 +1,11 @@
-extends ./base/base
-include components/form/form
+extends base/pug/base
 
-block variables
-    - var title = 'Простая форма на ajax'
+append variables
+    - var title = 'Главная страница сайта'
+    - var pageClass = 'homepage'
+    - var menuHref = '/'
 
-block columns
-    main.content__no-cols.col-12
-        h1.text-center Форма связи
-
-        //- Feedback form
-        .row.justify-content-center
-            .col-md-6
-                .form
-                    +form('feedback', true, true, true)
-                        .form-group
-                            .alert.alert-warning Каптча работает в тестовом режиме
-
-        h2.h1.text-center.mt-50 Форма в модальном окне
-        .modal-btn-container.text-center
-            a.popup-form--js.btn.btn-dark.px-5(href='#callback') Заказать звонок
-
-
+block content
+    .row.justify-content-center
+        .col-lg-9
 

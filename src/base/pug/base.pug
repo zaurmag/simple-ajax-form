@@ -1,0 +1,22 @@
+include ../../mixins/pug/svg-icon
+block variables
+    -
+        var baseDir = './';
+
+doctype html
+html(lang="ru")
+    //- Include head
+    include ./head
+
+    body(class=pageClass)
+        .page
+            .page__content
+                .container
+                    block content
+
+        //- Include callback modal
+        include ../../components/form/form--callback
+
+        script(src=`${baseDir}js/main.js`)
+
+        block script
