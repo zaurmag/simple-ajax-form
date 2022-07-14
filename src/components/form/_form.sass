@@ -32,8 +32,13 @@
         &--textarea
             height: 150px
 
-        &--error
-            border-color: $red-500
+        &#{$self}
+            &__control
+                &--error
+                    border-color: $red-500
+
+                &--success
+                    border-color: $success
 
     &__error-txt
         margin-top: 4px
@@ -50,6 +55,9 @@
 
         &:hover
             background-color: darken($teal-600, 4%)
+
+        &:focus
+            outline: none
 
         &--sending
             animation: progress 0.5s linear infinite

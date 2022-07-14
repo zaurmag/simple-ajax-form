@@ -79,6 +79,7 @@
     "enquire.js": "latest",
     "inputmask": "latest",
     "jquery-form-styler": "latest",
+    "just-validate": "^3.8.1",
     "svg4everybody": "latest"
   }
 }

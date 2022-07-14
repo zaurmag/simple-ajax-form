@@ -9,4 +9,38 @@ if ($phoneMask) {
 	}).mask($phoneMask)
 }
 
-new Form('#feedbackForm')
+new Form('#feedbackForm', {
+	validations: [
+		{
+			field: '#fbName',
+			rules: [
+				{
+					rule: 'required',
+					errorMessage: 'Введите ваше имя',
+				},
+			]
+		},
+		{
+			field: '#fbEmail',
+			rules: [
+				{
+					rule: 'required',
+					errorMessage: 'Введите ваш E-mail',
+				},
+				{
+					rule: 'email',
+					errorMessage: 'E-mail адрес невалидный!',
+				},
+			]
+		},
+		{
+			field: '#fbMessage',
+			rules: [
+				{
+					rule: 'required',
+					errorMessage: 'Введите текст сообщения',
+				}
+			]
+		}
+	]
+})
