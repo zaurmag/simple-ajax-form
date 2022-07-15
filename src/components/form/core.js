@@ -12,7 +12,16 @@ export class Form {
         this.validationsRules = options.validationsRules || []
         this.message = new Message(this.$form)
         this.validations = null
+        this.recaptcha = options.recaptcha
         this.init()
+        if (this.recaptcha.enable) {
+            let addScriptCaptcha = document.createElement('script')
+            addScriptCaptcha.src = 'https://www.google.com/recaptcha/api.js'
+            document.body.append(addScriptCaptcha)
+
+            const $fieldSet = this.$form.querySelector('.js-form-fields')
+            $fieldSet.insertAdjacentHTML('beforeend', this.recaptchaTemplate())
+        }
     }
 
     async submit(e) {
@@ -67,5 +76,13 @@ export class Form {
     init() {
         this.$form.addEventListener('submit', this.validate.bind(this), { once: true })
         this.validate()
+    }
+
+    recaptchaTemplate() {
+        return `
+            <div class="form__row">
+                <div class="g-recaptcha" data-sitekey="${this.recaptcha.captchaPublicKey}"></div>
+            </div>
+        `
     }
 }

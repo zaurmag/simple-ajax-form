@@ -4,7 +4,7 @@ $formGo = $formData["go"]; ?>
 
 <?php if(isset($formData)) {
     // ===== Reference ============================
-    $recaptchaOn = false;
+    $recaptchaOn = true;
 
     if ($recaptchaOn) {
         $recaptcha = $_POST['g-recaptcha-response'];
@@ -17,10 +17,6 @@ $formGo = $formData["go"]; ?>
     $fromEmail = "no-reply@zaurmag.ru"; // E-mail от имени которого приходит письмо. Почта на домене сайта.
 
     switch ($formGo) {
-        case 'opt':
-            $subject = "Заявка на прайс-лист для оптовика с сайта ***";
-            break;
-
         default:
             $subject = "Сообщение с сайта ****";
             break;
@@ -39,8 +35,7 @@ $formGo = $formData["go"]; ?>
         "name" => "Имя:",
         "phone" => "Телефон:",
         "email" => "E-mail:",
-        "message" => "Текст сообщения:",
-        "address" => "Адресс торговой точки"
+        "message" => "Текст сообщения:"
     );
 
     foreach($formData as $key => $value) {

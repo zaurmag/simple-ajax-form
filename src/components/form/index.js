@@ -10,6 +10,10 @@ if ($phoneMask) {
 }
 
 new Form('#feedbackForm', {
+	recaptcha: {
+		enable: true,
+		captchaPublicKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+	},
 	validationsRules: [
 		{
 			field: '#fbName',
