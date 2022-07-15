@@ -10,7 +10,7 @@ if ($phoneMask) {
 }
 
 new Form('#feedbackForm', {
-	validations: [
+	validationsRules: [
 		{
 			field: '#fbName',
 			rules: [

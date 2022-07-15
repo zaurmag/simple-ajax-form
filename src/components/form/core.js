@@ -1,4 +1,6 @@
 import JustValidate from 'just-validate'
+import { Message } from './message'
+import { cutSpaces } from "./utils"
 
 export class Form {
     constructor(selector, options = {}) {
@@ -7,7 +9,9 @@ export class Form {
         }
         this.$form = typeof selector === 'string' ? document.querySelector(selector) : selector
         this.url = options.urlFormHandler || '../form-submit/submit.php'
-        this.validations = options.validations || []
+        this.validationsRules = options.validationsRules || []
+        this.message = new Message(this.$form)
+        this.validations = null
         this.init()
     }
 
@@ -22,29 +26,46 @@ export class Form {
                 method: 'POST',
                 body: new FormData(this.$form)
             })
-            await response.text()
+            const result = await response.text()
             $btn.classList.remove('form__btn--sending')
             $btn.textContent = 'Отправить'
+
+            if (cutSpaces(result) === 'success') {
+                this.$form.reset()
+                this.validations.destroy()
+                this.message.show(cutSpaces(result))
+
+                setTimeout(() => {
+                    this.message.hide()
+                }, 3000)
+            }
         } catch(e) {
             console.error('Error:', e.message)
         }
     }
 
     validate() {
-        const validations = new JustValidate(this.$form, {
+        this.validations = new JustValidate(this.$form, {
             errorFieldCssClass: 'form__control--error',
             errorLabelCssClass: 'form__error-txt',
             successFieldCssClass: 'form__control--success',
-            successLabelCssClass: ''
+            successLabelCssClass: '',
+            lockForm: true,
         })
 
-        this.validations.forEach(options => {
-            validations.addField(options.field, options.rules)
+        this.validations.onSuccess(this.submit.bind(this))
+
+        // validations.onFail(event => {
+        //     console.log('Error:', event)
+        // })
+
+        this.validationsRules.forEach(options => {
+            this.validations.addField(options.field, options.rules)
         })
     }
 
     init() {
-        this.$form.addEventListener('submit', this.submit.bind(this))
+        this.$form.addEventListener('submit', this.validate.bind(this), { once: true })
         this.validate()
     }
 }
