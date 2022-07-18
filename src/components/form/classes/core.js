@@ -1,7 +1,8 @@
 import JustValidate from 'just-validate'
 import { Message } from './message'
-import { cutSpaces } from "./utils"
+import { cutSpaces } from "../utils"
 import { Emitter } from "./emitter"
+import { Recaptcha } from './recaptcha'
 
 export class Form {
     constructor(selector, options = {}) {
@@ -13,19 +14,11 @@ export class Form {
         this.validationsRules = options.validationsRules || []
         this.message = new Message(this.$form)
         this.validations = null
-        this.recaptcha = options.recaptcha
+        this.recaptcha = new Recaptcha(this.$form, options.recaptcha)
         this.debug = options.debug
         this.emitter = new Emitter()
         this.unsub = []
         this.init()
-        if (this.recaptcha.enable) {
-            let addScriptCaptcha = document.createElement('script')
-            addScriptCaptcha.src = 'https://www.google.com/recaptcha/api.js'
-            document.body.append(addScriptCaptcha)
-
-            const $fieldSet = this.$form.querySelector('.js-form-button')
-            $fieldSet.insertAdjacentHTML('beforebegin', this.recaptchaTemplate())
-        }
     }
 
     async submit(e) {
@@ -52,9 +45,8 @@ export class Form {
             if (cutSpaces(result) === 'success') {
                 this.$form.reset()
                 this.validations.destroy()
-                if (this.recaptcha.enable) {
-                    grecaptcha.reset()
-                }
+                this.recaptcha.reset()
+
                 this.message.show(cutSpaces(result))
                 this.emitter.emit('submit:success', e)
 
@@ -92,14 +84,6 @@ export class Form {
         this.validate = this.validate.bind(this)
         this.$form.addEventListener('submit', this.validate, { once: true })
         this.validate()
-    }
-
-    recaptchaTemplate() {
-        return `
-            <div class="form__row">
-                <div class="g-recaptcha" data-sitekey="${this.recaptcha.captchaPublicKey}"></div>
-            </div>
-        `
     }
 
     on(listener, callback) {

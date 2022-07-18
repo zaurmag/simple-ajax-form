@@ -1,5 +1,5 @@
-import { cutSpaces } from './utils'
-import { success } from './constants'
+import { cutSpaces } from '../utils'
+import { success } from '../constants'
 
 export class Message {
     constructor(form, options = {}) {

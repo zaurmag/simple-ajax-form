@@ -1,5 +1,5 @@
 import inputmask from 'inputmask'
-import { Form } from './core'
+import { Form } from './classes/core'
 const $phoneMask = document.querySelector('.js-phone-mask')
 
 if ($phoneMask) {
@@ -13,7 +13,7 @@ const feedbackForm = new Form('#feedbackForm', {
 	debug: false,
 	recaptcha: {
 		enable: true,
-		captchaPublicKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+		publicKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
 	},
 	validationsRules: [
 		{
