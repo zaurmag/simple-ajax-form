@@ -1,4 +1,4 @@
-export const successMess = {
+export const success = {
     title: 'Ваше сообщение отправлено!',
     desc: 'Мы свяжемся с Вами в самое ближайшее время'
 }

@@ -1,12 +1,11 @@
 <?php
 $formData = $_POST;
-$formGo = $formData["go"]; ?>
+$formGo = $formData["go"];
+$recaptchaEnable = $formData['g-recaptcha-response'];
+?>
 
 <?php if(isset($formData)) {
-    // ===== Reference ============================
-    $recaptchaOn = true;
-
-    if ($recaptchaOn) {
+    if ($recaptchaEnable) {
         $recaptcha = $_POST['g-recaptcha-response'];
     }
 
@@ -39,7 +38,7 @@ $formGo = $formData["go"]; ?>
     );
 
     foreach($formData as $key => $value) {
-        if ($key != 'go') {
+        if ($key != 'go' && $key != 'g-recaptcha-response') {
             $message .= "<tr>";
             $message .= "<td>";
             $message .= "<strong>" . $title[$key] . "</strong>";
@@ -59,9 +58,9 @@ $formGo = $formData["go"]; ?>
                'Reply-To: '.adopt($formData["name"]).' <'.$formData["email"].'> ' . PHP_EOL;
 
     $answer = '';
-    if ($recaptchaOn) {
+    if ($recaptchaEnable) {
         if (!empty($recaptcha)) {
-            $secret = '6LfMJSgTAAAAABw4lECZsLP5krXztMRZC0_Fgt3O';
+            $secret = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
             $url = "//www.google.com/recaptcha/api/siteverify?secret=".$secret ."&response=".$recaptcha."&remoteip=".$_SERVER['REMOTE_ADDR'];
 
             $curl = curl_init();

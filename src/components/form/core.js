@@ -14,6 +14,7 @@ export class Form {
         this.message = new Message(this.$form)
         this.validations = null
         this.recaptcha = options.recaptcha
+        this.debug = options.debug
         this.emitter = new Emitter()
         this.unsub = []
         this.init()
@@ -44,6 +45,10 @@ export class Form {
             $btn.classList.remove('form__btn--sending')
             $btn.textContent = 'Отправить'
 
+            if (this.debug) {
+                console.log(result)
+            }
+
             if (cutSpaces(result) === 'success') {
                 this.$form.reset()
                 this.validations.destroy()
@@ -55,8 +60,8 @@ export class Form {
                 }, 3000)
             }
         } catch(e) {
-            console.error('Error:', e.message)
             this.emitter.emit('submit:error', e)
+            console.error('Error:', e.message)
         }
     }
 

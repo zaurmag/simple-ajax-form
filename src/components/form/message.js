@@ -1,10 +1,12 @@
 import { cutSpaces } from './utils'
-import { successMess } from './constants'
+import { success } from './constants'
 
 export class Message {
     constructor(form, options = {}) {
         this.$form = form
-        this.textMessages = options.textMessages || successMess
+        this.textMessages = options.textMessages || {
+            success
+        }
         this.type = null
         this.$message = null
     }
