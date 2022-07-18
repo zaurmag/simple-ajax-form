@@ -23,8 +23,8 @@ export class Form {
             addScriptCaptcha.src = 'https://www.google.com/recaptcha/api.js'
             document.body.append(addScriptCaptcha)
 
-            const $fieldSet = this.$form.querySelector('.js-form-fields')
-            $fieldSet.insertAdjacentHTML('beforeend', this.recaptchaTemplate())
+            const $fieldSet = this.$form.querySelector('.js-form-button')
+            $fieldSet.insertAdjacentHTML('beforebegin', this.recaptchaTemplate())
         }
     }
 
@@ -52,6 +52,9 @@ export class Form {
             if (cutSpaces(result) === 'success') {
                 this.$form.reset()
                 this.validations.destroy()
+                if (this.recaptcha.enable) {
+                    grecaptcha.reset()
+                }
                 this.message.show(cutSpaces(result))
                 this.emitter.emit('submit:success', e)
 

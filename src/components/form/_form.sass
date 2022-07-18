@@ -5,6 +5,9 @@
     margin: 0 auto
     position: relative
 
+    &__form
+        position: relative
+
     &__title
         margin: 0 0 20px
         font-size: 24px
@@ -17,7 +20,9 @@
             opacity: 0
 
         .is-message-visible &
-            display: none
+            // display: none
+            visibility: hidden
+            z-index: -1
 
     &__row
         &:not(:last-child)
@@ -89,6 +94,8 @@
         transition: transform 0.3s linear, opacity 0.3s linear
         display: none
         opacity: 0
+        width: 100%
+        flex-shrink: 0
 
         &-content
             padding: 20px 15px
