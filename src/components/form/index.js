@@ -9,7 +9,7 @@ if ($phoneMask) {
 	}).mask($phoneMask)
 }
 
-new Form('#feedbackForm', {
+const feedbackForm = new Form('#feedbackForm', {
 	recaptcha: {
 		enable: true,
 		captchaPublicKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
@@ -47,4 +47,16 @@ new Form('#feedbackForm', {
 			]
 		}
 	]
+})
+
+feedbackForm.on('submit:success', event => {
+	console.log('Form submit:', event);
+})
+
+feedbackForm.on('submit:error', event => {
+	console.log('Form error:', event);
+})
+
+feedbackForm.on('submit:pre', event => {
+	console.log('Pre submit:', event);
 })

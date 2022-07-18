@@ -1,14 +1,10 @@
-import { cutSpaces } from "./utils"
+import { cutSpaces } from './utils'
+import { successMess } from './constants'
 
 export class Message {
     constructor(form, options = {}) {
         this.$form = form
-        this.textMessages = options.textMessages || {
-            success: {
-                title: 'Ваше сообщение отправлено!',
-                desc: 'Мы свяжемся с Вами в самое ближайшее время'
-            }
-        }
+        this.textMessages = options.textMessages || successMess
         this.type = null
         this.$message = null
     }
@@ -51,5 +47,10 @@ export class Message {
 
     append() {
         this.$form.insertAdjacentHTML('afterbegin', cutSpaces(this.template()))
+    }
+
+    destroy() {
+        this.hide()
+        this.type = null
     }
 }

@@ -1,6 +1,7 @@
 import JustValidate from 'just-validate'
 import { Message } from './message'
 import { cutSpaces } from "./utils"
+import { Emitter } from "./emitter"
 
 export class Form {
     constructor(selector, options = {}) {
@@ -13,6 +14,8 @@ export class Form {
         this.message = new Message(this.$form)
         this.validations = null
         this.recaptcha = options.recaptcha
+        this.emitter = new Emitter()
+        this.unsub = []
         this.init()
         if (this.recaptcha.enable) {
             let addScriptCaptcha = document.createElement('script')
@@ -31,6 +34,8 @@ export class Form {
         try {
             $btn.classList.add('form__btn--sending')
             $btn.textContent = 'Отправка...'
+            this.emitter.emit('submit:pre', e)
+
             const response = await fetch(this.url, {
                 method: 'POST',
                 body: new FormData(this.$form)
@@ -43,6 +48,7 @@ export class Form {
                 this.$form.reset()
                 this.validations.destroy()
                 this.message.show(cutSpaces(result))
+                this.emitter.emit('submit:success', e)
 
                 setTimeout(() => {
                     this.message.hide()
@@ -50,6 +56,7 @@ export class Form {
             }
         } catch(e) {
             console.error('Error:', e.message)
+            this.emitter.emit('submit:error', e)
         }
     }
 
@@ -74,7 +81,8 @@ export class Form {
     }
 
     init() {
-        this.$form.addEventListener('submit', this.validate.bind(this), { once: true })
+        this.validate = this.validate.bind(this)
+        this.$form.addEventListener('submit', this.validate, { once: true })
         this.validate()
     }
 
@@ -84,5 +92,16 @@ export class Form {
                 <div class="g-recaptcha" data-sitekey="${this.recaptcha.captchaPublicKey}"></div>
             </div>
         `
+    }
+
+    on(listener, callback) {
+        const unsub = this.emitter.subscribe(listener, callback)
+        this.unsub.push(unsub)
+    }
+
+    destroy() {
+        this.unsub.forEach(listener => listener.unsub())
+        this.$form.removeEventListener('submit', this.validate)
+        this.message.destroy()
     }
 }
