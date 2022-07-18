@@ -103,5 +103,7 @@ export class Form {
         this.unsub.forEach(listener => listener.unsub())
         this.$form.removeEventListener('submit', this.validate)
         this.message.destroy()
+        this.$form.reset()
+        this.validations.destroy()
     }
 }
